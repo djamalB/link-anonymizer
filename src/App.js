@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import HomePage from "../src/pages/HomePage";
+import SecondPage from "../src/pages/SecondPage";
 
 function App() {
+  const [key, setKey] = useState("");
+  const [redirectTo, setRedirectTo] = useState("");
+
+  const handleSubmit = (url) => {
+    const uniqueKey = Math.random().toString(36).substring(7);
+    setKey(uniqueKey);
+    setRedirectTo(url);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <HomePage handleSubmit={handleSubmit} />
+      <SecondPage addkey={key} redirectTo={redirectTo} />
     </div>
   );
 }
